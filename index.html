@@ -867,6 +867,91 @@
 
     .quizOpt:active { transform: translateY(2px); }
 
+    /* ===== Hiệu ứng minigame đẹp hơn ===== */
+    .overlay .modal { animation: modalPop 0.28s ease; }
+
+    @keyframes modalPop {
+      from { transform: scale(0.9) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .matchCard { transition: transform 0.15s ease, box-shadow 0.2s ease; }
+    .matchCard.open { animation: cardFlip 0.24s ease; }
+
+    @keyframes cardFlip {
+      0% { transform: scaleX(0.15); }
+      60% { transform: scaleX(1.08); }
+      100% { transform: scaleX(1); }
+    }
+
+    .matchCard.done {
+      animation: cardDone 0.5s ease;
+      box-shadow: 0 0 16px rgba(255, 209, 102, 0.9), 0 4px 0 rgba(91, 58, 102, 0.25);
+    }
+
+    @keyframes cardDone {
+      0% { transform: scale(1.18) rotate(-3deg); }
+      55% { transform: scale(0.9) rotate(2deg); }
+      100% { transform: scale(0.96) rotate(0); }
+    }
+
+    .quizOpt { transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease; }
+
+    .quizOpt.right {
+      background: linear-gradient(180deg, #d9f7c1, #8fe3a8);
+      border-color: #3d8a59;
+      animation: rightPop 0.35s ease;
+    }
+
+    @keyframes rightPop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(143, 227, 168, 0.95); }
+      100% { transform: scale(1); }
+    }
+
+    .quizOpt.wrongShake {
+      background: linear-gradient(180deg, #ffdfdf, #ffb9b9);
+      border-color: #c95a52;
+      animation: shakeX 0.4s ease;
+    }
+
+    @keyframes shakeX {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-6px); }
+      40% { transform: translateX(6px); }
+      60% { transform: translateX(-4px); }
+      80% { transform: translateX(3px); }
+    }
+
+    .simonBtn.lit { animation: simonGlow 0.32s ease; }
+
+    @keyframes simonGlow {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.14); box-shadow: 0 0 26px rgba(255, 209, 102, 1); }
+      100% { transform: scale(1.06); }
+    }
+
+    #safeZone { animation: zoneGlow 1.1s ease-in-out infinite alternate; }
+
+    @keyframes zoneGlow {
+      from { box-shadow: 0 0 8px rgba(255, 209, 102, 0.55); }
+      to { box-shadow: 0 0 22px rgba(255, 209, 102, 1); }
+    }
+
+    .scrapHole.pop { animation: molePop 0.26s ease; }
+
+    @keyframes molePop {
+      0% { transform: scale(0.65); }
+      60% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    #catchCanvas {
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.4), 0 10px 26px rgba(59, 38, 69, 0.3);
+    }
+
+    #choiceOptions { display: grid; gap: 10px; margin: 12px 0; }
+
   </style>
 </head>
 
@@ -906,8 +991,8 @@
 
       <div id="passwordOverlay" class="overlay hidden">
         <div class="modal pixel-panel">
-          <h2>🎞 Từ Khóa Trái Tim</h2>
-          <p id="passwordHint">Từ khóa là điều người ấy muốn nói với bạn mỗi ngày.</p>
+          <h2>💗 Từ Khóa Trái Tim</h2>
+          <p id="passwordHint">Từ khóa là điều ngọt ngào người ấy muốn nói với bạn — gợi ý: nó nằm ở PHẦN 1, trong giấc mơ đó.</p>
           <input id="passwordInput" type="text" autocomplete="off" placeholder="Nhập từ khóa..." />
           <p id="passwordError" style="color:#b64a7f; min-height: 24px;"></p>
           <div class="modalActions">
@@ -953,8 +1038,8 @@
 
       <div id="matchOverlay" class="overlay hidden">
         <div class="modal pixel-panel">
-          <h2>🎞 Ghép Đôi Khung Phim</h2>
-          <p>Cuộn phim "Ngày Đầu Gặp Gỡ" bị xé thành từng cặp khung hình rồi trộn tung lên. Lật thẻ tìm các cặp giống nhau — lật thoải mái, không giới hạn lượt!</p>
+          <h2>🧩 Ghép Đôi Mảnh Kí Ức</h2>
+          <p>Kí ức "Ngày Đầu Gặp Gỡ" bị vỡ thành từng cặp mảnh nhỏ rồi trộn tung lên. Lật thẻ tìm các cặp giống nhau — lật thoải mái, không giới hạn lượt!</p>
           <div id="matchGrid"></div>
           <p id="matchStatus" style="min-height:22px;color:#b64a7f;"></p>
           <div class="modalActions">
@@ -991,7 +1076,7 @@
       <div id="scrapOverlay" class="overlay hidden">
         <div class="modal pixel-panel">
           <h2>🧹 Dọn Sảnh Rạp Kiếm 50K</h2>
-          <p>Vé + trà sữa hết 50K mà ví thì 0 đồng... Khoan, đừng nghĩ tới chuyện bán thận! Khách làm rơi đồ khắp sảnh — chạm vào món vừa ló lên để dọn, mỗi món 5K tiền công, nhặt được 💍 ai đánh rơi thì tận 15K!</p>
+          <p>Combo 1 bỏng + 2 nước hết 50K mà ví thì 0 đồng. Khách làm rơi đồ khắp sảnh — chạm vào món vừa ló lên để dọn, mỗi món 5K tiền công, nhặt được 💍 ai đánh rơi thì tận 15K!</p>
           <div id="scrapGrid"></div>
           <p id="scrapStatus" style="min-height:22px;color:#b64a7f;"></p>
           <div class="modalActions">
@@ -1025,10 +1110,18 @@
         </div>
       </div>
 
+      <div id="choiceOverlay" class="overlay hidden">
+        <div class="modal pixel-panel">
+          <h2 id="choiceTitle">🤔 Chọn sao đây?</h2>
+          <p id="choiceQuestion"></p>
+          <div id="choiceOptions"></div>
+        </div>
+      </div>
+
       <div id="startOverlay" class="overlay">
         <div class="modal pixel-panel">
           <h1>Love Quest II · Time Adventure</h1>
-          <p>PHẦN 2 chính thức của Love Quest! Bộ phim ký ức về hai đứa vừa bị bé bụi Tíc Tắc quậy tung: 6 cuộn phim quý nhất văng về 6 vùng thời gian lúc hoàng hôn. Hãy đi qua 6 cảnh phim — mỗi cảnh một trò chơi — gom đủ 6 Mảnh Thời Gian ⏳ để bộ phim được chiếu trọn vẹn... và mở khóa chuyến đi TỚI TƯƠNG LAI 🚀</p>
+          <p>PHẦN 2 chính thức của Love Quest! Nếu Phần 1 là một GIẤC MƠ đẹp thì lần này, tất cả đều là KÍ ỨC CÓ THẬT: bé bụi Tíc Tắc vừa quậy tung cỗ máy, làm 6 mảnh kí ức quý nhất văng về 6 vùng thời gian lúc hoàng hôn. Hãy đi qua 6 vùng kí ức — mỗi vùng một trò chơi — gom đủ 6 Mảnh Kí Ức ⏳ để câu chuyện trọn vẹn... và mở khóa chuyến đi TỚI TƯƠNG LAI 🚀</p>
           <label class="nameLabel" for="playerNameInput">✏️ Đặt tên nhân vật của bạn:</label>
           <input id="playerNameInput" type="text" maxlength="16" autocomplete="off" placeholder="Nhập tên dễ thương..." />
           <label class="nameLabel">🎀 Chọn nhân vật:</label>
@@ -1059,84 +1152,85 @@
 
       // Danh sách nhân vật có thể chọn ở màn hình bắt đầu.
       characters: [
-        { id: "mochi", name: "Mochi", desc: "Cô bé tóc dài mơ mộng, tin rằng mọi kỷ niệm đều biết tỏa sáng.", hair: "#6b3b5f", hairStyle: "long", skinTone: "#ffd7c2", outfit: "#ff7ab6" },
-        { id: "miu", name: "Miu", desc: "Bé mèo tinh nghịch, đánh hơi được mọi bí mật giấu kín.", hair: "#5b3a66", hairStyle: "cat", skinTone: "#ffe3cf", outfit: "#bfa2ff" },
-        { id: "subin", name: "Su Bin", desc: "Tóc búi năng động, chạy nhanh hơn cả gió mùa thu.", hair: "#a05c2c", hairStyle: "ponytail", skinTone: "#ffd7c2", outfit: "#ffd166" }
+        { id: "hanhnhan", name: "Hạnh Nhân", desc: "Cô bé hạt hạnh nhân tóc dài nâu sữa, dịu dàng và ngọt bùi như ly sữa hạt buổi sáng.", hair: "#8a5a33", hairStyle: "long", skinTone: "#ffe3cf", outfit: "#e8a44e" },
+        { id: "hatde", name: "Hạt Dẻ", desc: "Bé hạt dẻ hai búi tóc tròn xoe, ấm nóng như túi hạt dẻ nướng giữa mùa đông.", hair: "#5f3a1a", hairStyle: "buns", skinTone: "#ffd7c2", outfit: "#c97b4a" },
+        { id: "dauphong", name: "Đậu Phộng", desc: "Cô nàng đậu phộng tóc đuôi ngựa lém lỉnh, giòn rụm và bùi bùi dễ thương.", hair: "#c99a55", hairStyle: "ponytail", skinTone: "#ffe3cf", outfit: "#ffd166" }
       ],
 
-      // Tiêu đề cảnh phim hiện khi bước vào khu vực mới.
+      // Tiêu đề vùng kí ức hiện khi bước vào khu vực mới.
       chapters: {
-        town: "🎬 Cảnh 1 · Ngày Đầu Gặp Gỡ",
-        garden: "🎬 Cảnh 2 · Hẹn Hò Bờ Biển",
-        challenge: "🎬 Cảnh 3 · Phi Vụ Ngân Hàng Kỷ Niệm",
-        house: "🎬 Cảnh 4 · Tấm Vé 5 Tỷ (Giá 50K)",
-        hall: "🎬 Cảnh 5 · Suất Chiếu Định Mệnh",
-        festival: "🎬 Cảnh 6 · Lễ Hội Hiện Tại",
-        stars: "🎬 Cảnh Kết · Cánh Đồng Sao"
+        town: "💭 Kí Ức 1 · Ngày Đầu Gặp Gỡ",
+        garden: "💭 Kí Ức 2 · Hẹn Hò Bờ Biển",
+        challenge: "💭 Kí Ức 3 · Phi Vụ Ngân Hàng Kỷ Niệm",
+        house: "💭 Kí Ức 4 · Combo Bỏng Nước 5 Tỷ",
+        hall: "💭 Kí Ức 5 · Suất Chiếu Định Mệnh",
+        festival: "💭 Kí Ức 6 · Lễ Hội Mùa Đông",
+        stars: "💫 Hồi Kết · Nhà Hàng Ngàn Sao"
       },
 
       // Lời dẫn truyện khi lần đầu đặt chân tới mỗi khu vực. {name} sẽ được thay bằng tên người chơi.
       areaIntros: {
         town: [
-          "🎬 CẢNH 1: NGÀY ĐẦU GẶP GỠ.",
-          "Kìa! Tíc Tắc đang ôm cuộn phim đầu tiên bay lượn khắp thị trấn!",
+          "💭 KÍ ỨC 1: NGÀY ĐẦU GẶP GỠ — thị trấn mùa thu ngập lá vàng.",
+          "Kìa! Tíc Tắc đang ôm mảnh kí ức đầu tiên bay lượn giữa những tán cây vàng rực!",
           "Đuổi theo tóm nó 3 lần để đòi lại — nó bay nhanh, nhưng {name} là nhân vật chính mà 💨"
         ],
         garden: [
-          "🎬 CẢNH 2: BUỔI HẸN ĐẦU TIÊN — bãi biển giờ vàng năm ấy.",
+          "💭 KÍ ỨC 2: BUỔI HẸN ĐẦU TIÊN — bãi biển giờ vàng năm ấy.",
           "Sóng vẫn vỗ y hệt cái chiều hai người tay chạm tay lần đầu.",
-          "Nhưng gió biển đang cuốn từng khung hình bay tứ tung... tìm Cô Sóng Biển mượn giỏ hứng lại nè!"
+          "Nhưng gió biển đang cuốn từng mảnh kỷ niệm bay tứ tung... tìm Cô Sóng Biển mượn giỏ hứng lại nè!"
         ],
         challenge: [
-          "🎬 CẢNH 3: NGÂN HÀNG KỶ NIỆM lúc nửa đêm.",
-          "Tíc Tắc khóa cuộn phim quý nhất vào két sắt, còn thuê hẳn đội mây bảo vệ bay tuần tra.",
+          "💭 KÍ ỨC 3: NGÂN HÀNG KỶ NIỆM lúc nửa đêm.",
+          "Tíc Tắc khóa mảnh kí ức quý nhất vào két sắt, còn thuê hẳn đội mây bảo vệ bay tuần tra.",
           "Của mình thì mình... lấy lại thôi! Né mây, lần theo lối tới két sắt ở góc đông nam 😎"
         ],
         house: [
-          "🎬 CẢNH 4: BUỔI XEM PHIM ĐẦU TIÊN — sảnh rạp phim cũ.",
-          "Muốn vào phòng chiếu phải có 2 vé + 2 ly trà sữa. Nghe đồn combo này giá tận... 5 TỶ?!",
-          "Bình tĩnh, đừng vội bán thận! Cô Chủ Quầy đang cần người dọn sảnh — tới hỏi thử xem 🧹"
+          "💭 KÍ ỨC 4: BUỔI XEM PHIM ĐẦU TIÊN — sảnh rạp phim cũ.",
+          "Muốn vào phòng chiếu phải có combo huyền thoại: 1 bỏng + 2 nước.",
+          "Ví thì đang 0 đồng... tới QUẦY NƯỚC giữa sảnh hỏi Cô Chủ Quầy thử xem 🧹"
         ],
         hall: [
-          "🎬 CẢNH 5: PHÒNG CHIẾU — suất chiếu đầu tiên của hai đứa.",
+          "💭 KÍ ỨC 5: PHÒNG CHIẾU — suất chiếu đầu tiên của hai đứa.",
           "Máy chiếu vẫn giữ nguyên bộ phim hôm ấy, nhưng nó chỉ chịu chạy khi nghe đúng nhịp tim.",
           "Tới máy chiếu giữa hai hàng ghế, bấm lại nhịp tim của buổi hẹn rạp phim nha 💓"
         ],
         festival: [
-          "🎬 CẢNH 6: LỄ HỘI HIỆN TẠI — chính là hôm nay.",
-          "Năm cuộn phim đã về chỗ cũ, chỉ còn màn kiểm tra cuối của MC lễ hội.",
-          "Thắng trò 'Đố Vui Chuyện Chúng Mình' để chứng minh {name} là nhân vật chính thật sự 🎤"
+          "💭 KÍ ỨC 6: LỄ HỘI MÙA ĐÔNG — chính là hôm nay, tuyết đang rơi nhè nhẹ.",
+          "Năm mảnh kí ức đã về chỗ cũ, đèn lồng thắp ấm cả quảng trường phủ tuyết trắng.",
+          "Thắng trò 'Đố Vui Chuyện Chúng Mình' của MC để chứng minh {name} là nhân vật chính thật sự 🎤"
         ],
         stars: [
-          "🎬 CẢNH KẾT: CÁNH ĐỒNG SAO — nơi mọi thước phim hóa thành ánh sáng.",
-          "Ở cuối con đường ánh sáng, Cỗ Máy Thời Gian Trái Tim đang chờ đủ sáu mảnh ⏳",
-          "Đi hết con đường này... là tới cảnh kết đẹp nhất, dành riêng cho {name}."
+          "💫 HỒI KẾT: NHÀ HÀNG NGÀN SAO — nhà hàng nhỏ ấm áp mở giữa cánh đồng sao.",
+          "Nến vừa thắp, bàn nào cũng đặt sẵn một nồi lẩu... và ở cuối lối đi, Cỗ Máy Thời Gian Trái Tim đang chờ đủ sáu mảnh ⏳",
+          "Đi hết lối đi này... là tới bàn tiệc dành riêng cho {name}."
         ]
       },
 
       // Từ khóa của máy chiếu ở Rạp Phim (Chương 5). Gõ có dấu hay không dấu đều được.
+      // Gợi ý trong game: "điều ngọt ngào muốn nói — đã xuất hiện ở Phần 1 (giấc mơ)".
       passcode: "yêu",
 
       // Bộ câu hỏi đố vui Chương 6 — sửa thoải mái để cá nhân hóa!
       // correct là số thứ tự đáp án đúng (bắt đầu từ 0).
       quizQuestions: [
         {
-          q: "Món uống gắn liền với chuyện chúng mình là gì?",
-          options: ["Trà sữa 🧋", "Cà phê đen không đường ☕", "Nước sôi để nguội 💧"],
-          correct: 0,
-          wrong: "MC Lễ Hội 🎤: Hơi sai sai nha... gợi ý: nó có trân châu đó!"
-        },
-        {
-          q: "Khi {name} buồn, người ấy sẽ làm gì đầu tiên?",
-          options: ["Giả vờ không thấy 🙈", "Ở bên cạnh và lắng nghe 💗", "Đi ngủ trước cho đỡ mệt 😴"],
-          correct: 1,
-          wrong: "MC Lễ Hội 🎤: Trời ơi, người ấy nghe thấy là dỗi á! Chọn lại nè."
-        },
-        {
-          q: "Điều người ấy muốn nói với {name} mỗi ngày là gì?",
-          options: ["Ăn cơm chưa? 🍚", "Nhớ uống nước nha 🥤", "Yêu {name} nhiều lắm 💗"],
+          q: "Chàng trai nghiện cái gì nhất?",
+          options: ["Thể thao ⚽", "Game 🎮", "Em 💗"],
           correct: 2,
-          wrong: "MC Lễ Hội 🎤: Câu đó cũng hay nói thật... nhưng còn một câu ngọt hơn cơ!"
+          wrong: "MC Lễ Hội 🎤: Sai rồi nha! Mấy thứ đó tuổi gì mà đòi so... chọn lại đi!"
+        },
+        {
+          q: "Nếu chàng trai phải chọn MỘT THỨ để giữ cả đời?",
+          options: ["Điện thoại 📱", "Tiền 💰", "Em 💗"],
+          correct: 2,
+          wrong: "MC Lễ Hội 🎤: Trời ơi, mấy thứ đó làm sao quý bằng... thôi gợi ý lộ quá rồi, chọn lại nè 😆"
+        },
+        {
+          q: "Chàng trai giống gì nhất?",
+          options: ["Nam thần đẹp trai số 1 thế giới 😎✨", "Bò ngố 🐮", "Khủng long 🦖"],
+          correct: 0,
+          wrong: "MC Lễ Hội 🎤: Dám chọn đáp án đó hả?! Chàng trai mà nghe được là dỗi cả tuần á, chọn lại mau!"
         }
       ],
 
@@ -1158,21 +1252,21 @@
 
       npcLines: {
         townWelcome: [
-          "Cụ Đồng Hồ 🕰: Ôi! {name} tới rồi! Máy quay... à nhầm, cỗ máy thời gian đưa cháu về đúng CẢNH 1: NGÀY ĐẦU GẶP GỠ.",
-          "Cụ Đồng Hồ 🕰: Bé bụi Tíc Tắc đang ôm cuộn phim của cảnh này bay lượn khắp thị trấn kia kìa!",
+          "Cụ Đồng Hồ 🕰: Ôi! {name} tới rồi! Cỗ máy thời gian đưa cháu về đúng KÍ ỨC 1: NGÀY ĐẦU GẶP GỠ.",
+          "Cụ Đồng Hồ 🕰: Bé bụi Tíc Tắc đang ôm mảnh kí ức của vùng này bay lượn khắp thị trấn kia kìa!",
           "Cụ Đồng Hồ 🕰: Đuổi theo tóm nó 3 lần để đòi lại, rồi mang về đây cho ta nhé!"
         ],
         townNeedMore: [
-          "Cụ Đồng Hồ 🕰: Tíc Tắc vẫn đang giữ cuộn phim đó! Nó bay nhanh nhưng mau đuối sức lắm.",
+          "Cụ Đồng Hồ 🕰: Tíc Tắc vẫn đang giữ mảnh kí ức đó! Nó bay nhanh nhưng mau đuối sức lắm.",
           "Cụ Đồng Hồ 🕰: Cứ đuổi sát, dồn nó vào góc rồi nhấn E để tóm nha!"
         ],
         townReady: [
-          "Cụ Đồng Hồ 🕰: Lấy lại được rồi! Nhưng cuộn phim đã bị xé thành từng khung hình, trộn lẫn hết cả...",
-          "Cụ Đồng Hồ 🕰: Giờ thì lật và ghép từng cặp khung hình, đưa Cảnh 1 về nguyên vẹn nào!"
+          "Cụ Đồng Hồ 🕰: Lấy lại được rồi! Nhưng kí ức ấy đã vỡ thành từng cặp mảnh nhỏ, trộn lẫn hết cả...",
+          "Cụ Đồng Hồ 🕰: Giờ thì lật và ghép từng cặp mảnh, đưa Kí Ức 1 về nguyên vẹn nào!"
         ],
         gardenIntro: [
-          "Cô Sóng Biển 🌊: Chào cưng! Đây là bãi biển của CẢNH 2: BUỔI HẸN ĐẦU TIÊN đó.",
-          "Cô Sóng Biển 🌊: Tíc Tắc nghịch quá, gió biển cuốn từng khung hình — vỏ sò, trái tim, cả tiếng cười hôm ấy — bay hết lên trời.",
+          "Cô Sóng Biển 🌊: Chào cưng! Đây là bãi biển của KÍ ỨC 2: BUỔI HẸN ĐẦU TIÊN đó.",
+          "Cô Sóng Biển 🌊: Tíc Tắc nghịch quá, gió biển cuốn từng mảnh kỷ niệm — vỏ sò, trái tim, cả tiếng cười hôm ấy — bay hết lên trời.",
           "Cô Sóng Biển 🌊: Cầm chiếc giỏ này hứng lại 8 kỷ niệm giúp cô nha. Coi chừng mấy bé sứa tím rớt xuống đó!"
         ],
         gateLocked: [
@@ -1186,40 +1280,44 @@
           "Mật Vụ Xíu Xiu 🕶: Nghe đồn ai đột nhập mà không đụng bảo vệ lần nào sẽ được phong danh hiệu Siêu Trộm Êm Ru đó."
         ],
         teaShopIntro: [
-          "Cô Chủ Quầy 🧋: Chào cưng! Muốn xem lại CẢNH 4: BUỔI XEM PHIM ĐẦU TIÊN hả?",
-          "Cô Chủ Quầy 🧋: Combo y như hôm đó gồm 2 vé + 2 ly trà sữa... tổng cộng là 5 TỶ nha cưng 😌",
-          "Cô Chủ Quầy 🧋: ĐÙA ĐÓ TRỜI ƠI, nhìn mặt cưng tái mét kìa 😂 50K thôi! Mà ví 0 đồng thì cũng đừng dại bán thận nha.",
-          "Cô Chủ Quầy 🧋: Dọn sảnh giúp cô đi — dọn tới đâu trả công tới đó. Tới QUẦY NƯỚC sáng đèn, nhấn E là bắt đầu!"
+          "Cô Chủ Quầy 🧋: Chào cưng! Muốn sống lại KÍ ỨC 4: BUỔI XEM PHIM ĐẦU TIÊN hả?",
+          "Cô Chủ Quầy 🧋: Combo y như hôm đó: 1 bỏng + 2 nước. Giá hả? 5 TỶ đó... đùa chút thôi mà 😌",
+          "Cô Chủ Quầy 🧋: Tới QUẦY NƯỚC sáng đèn giữa sảnh rồi nhấn E, cô kể cho nghe cách kiếm tiền."
         ],
         keywordHint: [
-          "Từ khóa là điều {sender} muốn nói với {name} mỗi ngày."
+          "Từ khóa là điều ngọt ngào {sender} muốn nói với {name}. Gợi ý nè: nó đã từng xuất hiện ở PHẦN 1 — trong giấc mơ ấy đó 😉"
         ]
       },
 
       finalGiftCutsceneLines: [
-        "Cỗ máy khẽ rùng mình... sáu Mảnh Thời Gian xoay tròn rồi ghép lại thành một trái tim sáng rực ⏳💗",
-        "Từ luồng sáng ấm áp, {sender} bước ra — không phải trong ký ức nữa, mà là ở NGAY HIỆN TẠI.",
-        "Giữa cánh đồng sao, hai đứa ngồi xuống bên nồi lẩu nghi ngút khói mà {name} vừa tự tay nấu 🍲",
-        "{sender}: Kỷ niệm nào rồi cũng có thể phai... nhưng chỉ cần mình còn ngồi ăn chung một nồi lẩu, mình sẽ lại nấu ra kỷ niệm mới 💗"
+        "Cỗ máy khẽ rùng mình... sáu Mảnh Kí Ức xoay tròn rồi ghép lại thành một trái tim sáng rực ⏳💗",
+        "Từ luồng sáng ấm áp, {sender} bước ra — không phải trong kí ức nữa, mà là ở NGAY HIỆN TẠI.",
+        "Bên chiếc bàn đẹp nhất Nhà Hàng Ngàn Sao, hai đứa ngồi xuống cạnh nồi lẩu nghi ngút khói mà {name} vừa tự tay nấu 🍲",
+        "{sender} gắp miếng ngon nhất nồi, thổi nguội thật kỹ rồi mới chịu đặt vào chén của {name} 🥢",
+        "Hai đứa vừa ăn vừa kể lại sáu vùng kí ức vừa đi qua — cười tới mức suýt quên nồi lẩu đang sôi.",
+        "{sender}: Kỷ niệm nào rồi cũng có thể phai... nhưng chỉ cần mình còn ngồi ăn chung một nồi lẩu, mình sẽ lại nấu ra kỷ niệm mới 💗",
+        "{sender}: Vậy ngoéo tay nha — hết nồi này, mình hẹn nhau MỘT BỮA NỮA. Lần này là lẩu thật, ở ngoài đời thật 🤙🍲",
+        "Hai ngón út móc vào nhau dưới trời sao. Lời hẹn cho bữa sau đã được cất kỹ vào tim ⭐"
       ],
 
       finalLetter: [
         "Gửi {name},",
-        "Vậy là bộ phim nhỏ về chúng ta đã chiếu tới cảnh cuối cùng — và {name} chính là nhân vật chính đẹp nhất của nó.",
-        "Sáu cảnh phim vừa đi qua không phải do Tíc Tắc chọn đâu: đó là sáu khoảnh khắc mà {sender} chưa từng dám quên.",
-        "Ngày đầu gặp gỡ. Buổi hẹn bờ biển có bắt ngao, có tâm sự. Chiếc két giữ điều quý giá nhất. Tấm vé '5 tỷ' giá 50K. Nụ hôn trong phòng chiếu. Và lễ hội của chính hôm nay.",
+        "Vậy là chuyến du hành đã tới trang cuối — và {name} chính là nhân vật chính đẹp nhất của cả câu chuyện.",
+        "Phần 1 là một giấc mơ. Còn sáu vùng đất vừa đi qua đều là KÍ ỨC CÓ THẬT mà {sender} chưa từng dám quên: ngày đầu gặp gỡ, buổi hẹn bờ biển có bắt ngao có tâm sự, chiếc két giữ điều quý giá nhất, tấm vé '5 tỷ' giá 50K, suất chiếu đầu tiên, và lễ hội của chính hôm nay.",
+        "Trò chơi nhỏ này không mong điều gì to tát — nó chỉ muốn gửi gắm tới {name} thật nhiều NIỀM VUI. Chỉ cần chơi xong mà {name} mỉm cười, là nó đã hoàn thành nhiệm vụ rồi 😊",
         "Nếu có một cỗ máy thời gian thật, điều duy nhất {sender} muốn làm... là quay lại và chọn gặp {name} thêm một lần nữa — rồi thêm một lần nữa.",
-        "P/s: Nồi lẩu đoàn viên là do chính tay {name} nêm đó — nhớ chụp ảnh gửi {sender}, để mình hẹn nhau một nồi lẩu thật ngoài đời nha 🍲📸",
+        "P/s: Mình ngoéo tay rồi đó nha — bữa lẩu tiếp theo sẽ là lẩu thật, ở ngoài đời thật. Nhớ chụp ảnh nồi lẩu trong game gửi {sender} để đặt lịch liền 🍲📸",
         "Thương {name} thật nhiều 💗"
       ],
 
       openingStory: [
-        "🎬 CẢNH MỞ ĐẦU — Có một người lặng lẽ dựng cả một BỘ PHIM từ những kỷ niệm với {name}, cất kỹ trong Cỗ Máy Thời Gian Trái Tim ⏳",
+        "💭 MỞ ĐẦU — Phần 1 khép lại như một GIẤC MƠ đẹp. Nhưng lần này thì khác: tất cả những gì {name} sắp bước vào đều là KÍ ỨC CÓ THẬT 💗",
+        "Có một người đã lặng lẽ gom từng kí ức với {name}, cất thật kỹ trong Cỗ Máy Thời Gian Trái Tim ⏳",
         "Nhưng đêm qua, bé bụi thời gian Tíc Tắc lẻn vào phòng máy và hắt xì một cái thật to...",
-        "BÙM! Sáu cuộn phim quý nhất văng về sáu vùng thời gian khác nhau!",
-        "Không ai đi tìm, những thước phim ấy sẽ mờ dần... và bộ phim về hai đứa sẽ mãi mãi dang dở.",
-        "Cỗ máy chỉ chịu mở cửa cho một người duy nhất — người có nhịp tim trùng khớp với từng khung hình.",
-        "Đèn rạp đã tắt. Màn ảnh đã sáng. Và nhân vật chính của bộ phim này... là {name} 💗"
+        "BÙM! Sáu mảnh kí ức quý nhất văng về sáu vùng thời gian khác nhau!",
+        "Không ai đi tìm, những kí ức ấy sẽ mờ dần... như giấc mơ tan biến khi vừa tỉnh dậy.",
+        "Cỗ máy chỉ chịu mở cửa cho một người duy nhất — người có nhịp tim trùng khớp với từng kí ức.",
+        "Và người ấy... chính là {name} 💗"
       ],
 
       loveMeterMax: 100,
@@ -1366,13 +1464,13 @@
     const STORAGE_KEY = "loveQuestTimeAdventureSave_v8";
     const collectedIds = new Set();
     const achievements = [
-      { id: "first_piece", name: "Mảnh Thời Gian Đầu Tiên ⏳", desc: "Ghép đôi ký ức thành công ở Chương 1." },
-      { id: "all_pieces", name: "Người Vá Thời Gian", desc: "Thu thập đủ 6 Mảnh Thời Gian." },
+      { id: "first_piece", name: "Mảnh Kí Ức Đầu Tiên ⏳", desc: "Ghép đôi kí ức thành công ở Chương 1." },
+      { id: "all_pieces", name: "Người Vá Kí Ức", desc: "Thu thập đủ 6 Mảnh Kí Ức." },
       { id: "tictac_catcher", name: "Thợ Săn Bụi Thời Gian 💨", desc: "Tóm được Tíc Tắc đủ 3 lần ở Chương 1." },
       { id: "tea_master", name: "Thợ Bánh Tài Ba", desc: "Hoàn thành mini game nướng bánh và rước bé mèo về." },
       { id: "no_hurt", name: "Siêu Trộm Êm Ru 🕶", desc: "Phá két thành công mà không đụng bảo vệ mây lần nào." },
       { id: "money_maker", name: "Thoát Kiếp Bán Thận 🧋", desc: "Kiếm đủ 50K tiền công dọn sảnh rạp ở Chương 4." },
-      { id: "thesis_master", name: "Suất Chiếu Định Mệnh 🎬", desc: "Xem trọn bộ phim ký ức và nhận nụ hôn trong phòng chiếu." },
+      { id: "thesis_master", name: "Suất Chiếu Định Mệnh 🎬", desc: "Sống lại trọn vẹn suất chiếu đầu tiên và nhận nụ hôn trong phòng chiếu." },
       { id: "quiz_master", name: "MC Cũng Phải Nể 🎤", desc: "Trả lời đúng hết đố vui Chuyện Chúng Mình." },
       { id: "pet_friend", name: "Bạn Của Muôn Loài 🐾", desc: "Làm quen đủ 4 bé pet trong thế giới." },
       { id: "fashionista", name: "Tín Đồ Thời Trang 👗", desc: "Mở khóa từ 5 skin trở lên." },
@@ -1606,7 +1704,7 @@
           if (player.ticTacCatches < 3) {
             return `Nhiệm vụ: đuổi bắt bé bụi Tíc Tắc 💨 (${player.ticTacCatches}/3) — lại gần và nhấn E!`;
           }
-          if (!player.shard1) return "Nhiệm vụ: đem xấp khung phim tới Cụ Đồng Hồ để chơi Ghép Đôi Ký Ức 🃏";
+          if (!player.shard1) return "Nhiệm vụ: đem xấp mảnh kí ức tới Cụ Đồng Hồ để chơi Ghép Đôi Mảnh Kí Ức 🃏";
           return "Nhiệm vụ: đi hết con đường PHÍA NAM, qua cổng thời gian tới Bãi Biển Hẹn Hò.";
         },
         theme: "day"
@@ -1835,8 +1933,8 @@
         start: { tx: 2, ty: 7 },
         objects,
         quest: () => {
-          if (!player.shard4) return "Nhiệm vụ: tới QUẦY NƯỚC giữa sảnh (nhấn E) — dọn sảnh kiếm 50K mua vé + trà sữa 🧹";
-          return "Nhiệm vụ: cầm vé đi hết thảm đỏ PHÍA NAM, vào cửa PHÒNG CHIẾU 🎬";
+          if (!player.shard4) return "Nhiệm vụ: tới QUẦY NƯỚC giữa sảnh (nhấn E) — kiếm 50K mua combo 1 bỏng + 2 nước 🧹";
+          return "Nhiệm vụ: ôm bỏng nước đi hết thảm đỏ PHÍA NAM, vào cửa PHÒNG CHIẾU 🎬";
         },
         theme: "house"
       };
@@ -1865,7 +1963,7 @@
       // Khán giả ngồi lẫn trong các hàng ghế.
       objects.push(obj("judge_1", "npc", 5, 10, { solid: true, data: { role: "audience", color: "#7bdff2" }, interact: () => openDialog(["Khán giả 🍿: Suỵt! Nghe nói hôm nay chiếu lại thước phim tỏ tình huyền thoại đó!"]) }));
       objects.push(obj("judge_2", "npc", 16, 12, { solid: true, data: { role: "audience", color: "#ffb86b" }, interact: () => openDialog(["Khán giả 🥤: Tớ đợi suất chiếu này lâu lắm rồi. {name} mau làm máy chiếu chạy đi!"]) }));
-      objects.push(obj("judge_3", "npc", 7, 14, { solid: true, data: { role: "usher", color: "#bfa2ff" }, interact: () => openDialog(["Bác Soát Vé 🎟: Máy chiếu giữa rạp chỉ nhận đúng nhịp tim của người trong ký ức thôi.", "Bác Soát Vé 🎟: Sau màn nhịp tim, nó còn hỏi một TỪ KHÓA nữa — chính là điều {sender} muốn nói với {name} mỗi ngày đó 😉"]) }));
+      objects.push(obj("judge_3", "npc", 7, 14, { solid: true, data: { role: "usher", color: "#bfa2ff" }, interact: () => openDialog(["Bác Soát Vé 🎟: Máy chiếu giữa rạp chỉ nhận đúng nhịp tim của người trong ký ức thôi.", "Bác Soát Vé 🎟: Sau màn nhịp tim, nó còn hỏi một TỪ KHÓA nữa — điều ngọt ngào {sender} muốn nói với {name}. Nghe đồn từ khóa ấy từng xuất hiện ở PHẦN 1, trong giấc mơ đó 😉"]) }));
 
       // Ba hàng ghế đỏ mỗi bên, chừa lối đi giữa — đúng chuẩn phòng chiếu.
       [8, 10, 12].forEach(row => {
@@ -1893,7 +1991,7 @@
         start: { tx: 10, ty: 13 },
         objects,
         quest: () => player.shard5
-          ? "Nhiệm vụ: ra cửa EXIT cạnh màn ảnh (góc tây bắc) để tới Lễ Hội Hiện Tại!"
+          ? "Nhiệm vụ: ra cửa EXIT cạnh màn ảnh (góc tây bắc) để tới Lễ Hội Mùa Đông!"
           : "Nhiệm vụ: tới máy chiếu giữa rạp, bấm lại nhịp tim suất chiếu đầu tiên 💓 rồi nhập từ khóa.",
         theme: "hall"
       };
@@ -1947,12 +2045,12 @@
 
       return {
         id: "festival",
-        name: "Lễ Hội Hiện Tại",
+        name: "Lễ Hội Mùa Đông",
         map: toRows(map),
         start: { tx: 2, ty: 9 },
         objects,
         quest: () => player.shard6
-          ? "Nhiệm vụ: ra cổng sao PHÍA NAM quảng trường để tới Cánh Đồng Sao — cảnh kết đang chờ!"
+          ? "Nhiệm vụ: ra cổng sao PHÍA NAM quảng trường để tới Nhà Hàng Ngàn Sao — hồi kết đang chờ!"
           : "Nhiệm vụ: gặp MC Lễ Hội trên sân khấu để chơi Đố Vui Chuyện Chúng Mình 🎤",
         theme: "festival"
       };
@@ -1978,6 +2076,17 @@
       [[4,4],[8,15],[13,13],[21,4],[25,15],[5,15],[24,5],[17,15],[25,3]].forEach(([x,y]) => put(map, x, y, "F"));
 
       const objects = [];
+      // Bàn ăn của nhà hàng — mỗi bàn một nồi lẩu nhỏ nghi ngút khói.
+      [[4, 6], [15, 9], [20, 6], [12, 12], [10, 14], [23, 15]].forEach(([x, y], i) => {
+        objects.push(obj(`dine_table_${i}`, "dineTable", x, y, {
+          w: 28, h: 24, solid: true,
+          interact: () => openDialog([
+            "Chiếc bàn gỗ trải khăn đỏ, nồi lẩu nhỏ đang sôi lăn tăn chờ thực khách 🍲",
+            "Tấm thiệp trên bàn ghi: 'Bàn đã đặt trước — cho những kỷ niệm sắp tới.'"
+          ])
+        }));
+      });
+
       // Cỗ Máy Thời Gian Trái Tim — trả 6 mảnh, nhận bữa lẩu đoàn viên.
       objects.push(obj("time_machine", "timeMachine", 24, 10, {
         w: 34,
@@ -1988,11 +2097,11 @@
 
       return {
         id: "stars",
-        name: "Cánh Đồng Sao",
+        name: "Nhà Hàng Ngàn Sao",
         map: toRows(map),
         start: { tx: 3, ty: 9 },
         objects,
-        quest: () => player.finalGiftOpened ? "Nhiệm vụ: đọc lá thư cuối và nhận món quà bí mật." : "Nhiệm vụ: đi theo con đường ánh sáng tới Cỗ Máy Thời Gian Trái Tim ⏳",
+        quest: () => player.finalGiftOpened ? "Nhiệm vụ: đọc lá thư cuối và nhận món quà bí mật." : "Nhiệm vụ: đi theo lối đi giữa các bàn tới Cỗ Máy Thời Gian Trái Tim ⏳",
         theme: "stars"
       };
     }
@@ -2089,19 +2198,49 @@
       };
     }
 
+    // Lá thu / bông tuyết rơi từ trên trời xuống, lượn nhẹ theo gió.
+    function makeFallingBit(kind) {
+      const mapW = currentArea.map[0].length * TILE;
+      const mapH = currentArea.map.length * TILE;
+      const colors = kind === "leaf"
+        ? ["#e09032", "#d94f30", "#f2c14e", "#cf8a2e"]
+        : ["#ffffff", "#e6f0ff", "#dfe8ff"];
+      return {
+        kind,
+        x: Math.random() * mapW,
+        y: Math.random() * mapH,
+        t: Math.random() * 10,
+        speed: kind === "leaf" ? 12 + Math.random() * 14 : 16 + Math.random() * 18,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      };
+    }
+
     function spawnButterflies() {
       butterflies.length = 0;
       if (currentArea.id === "town") {
-        for (let i = 0; i < 7; i++) butterflies.push(makeButterfly(false));
-      } else if (["stars", "festival", "garden"].includes(currentArea.id)) {
-        // Bãi biển chiều tà cũng có đom đóm sáng lấp lánh.
+        // Mùa thu: lá vàng rơi khắp thị trấn + vài cánh bướm.
+        for (let i = 0; i < 14; i++) butterflies.push(makeFallingBit("leaf"));
+        for (let i = 0; i < 4; i++) butterflies.push(makeButterfly(false));
+      } else if (currentArea.id === "festival") {
+        // Mùa đông: tuyết rơi nhè nhẹ suốt lễ hội.
+        for (let i = 0; i < 30; i++) butterflies.push(makeFallingBit("snow"));
+      } else if (["stars", "garden"].includes(currentArea.id)) {
+        // Nhà hàng có tàn nến bay như đom đóm; bãi biển chiều tà cũng lấp lánh.
         for (let i = 0; i < 12; i++) butterflies.push(makeButterfly(true));
       }
     }
 
     function updateButterflies(dt) {
+      const mapW = currentArea ? currentArea.map[0].length * TILE : 0;
+      const mapH = currentArea ? currentArea.map.length * TILE : 0;
       for (const b of butterflies) {
         b.t += dt;
+        if (b.kind === "leaf" || b.kind === "snow") {
+          b.y += b.speed * dt;
+          b.x += Math.sin(b.t * (b.kind === "leaf" ? 2.2 : 1.4)) * (b.kind === "leaf" ? 22 : 14) * dt;
+          if (b.y > mapH + 8) { b.y = -8; b.x = Math.random() * mapW; }
+          continue;
+        }
         b.x += Math.cos(b.t * 0.9) * b.speed * dt;
         b.y += Math.sin(b.t * 1.4) * b.speed * 0.7 * dt;
       }
@@ -2112,6 +2251,22 @@
         const x = Math.floor(b.x - camera.x);
         const y = Math.floor(b.y - camera.y + Math.sin(b.t * 6) * 2);
         if (x < -10 || y < -10 || x > VIEW_W + 10 || y > VIEW_H + 10) continue;
+        if (b.kind === "leaf") {
+          // Lá thu xoay nhẹ khi rơi.
+          const flip = Math.sin(b.t * 5) > 0;
+          ctx.fillStyle = b.color;
+          if (flip) { ctx.fillRect(x, y, 4, 2); ctx.fillRect(x + 1, y - 1, 2, 1); }
+          else { ctx.fillRect(x, y, 2, 4); ctx.fillRect(x - 1, y + 1, 1, 2); }
+          continue;
+        }
+        if (b.kind === "snow") {
+          ctx.save();
+          ctx.globalAlpha = 0.65 + Math.sin(b.t * 3) * 0.3;
+          ctx.fillStyle = b.color;
+          ctx.fillRect(x, y, 2, 2);
+          ctx.restore();
+          continue;
+        }
         if (b.firefly) {
           ctx.save();
           ctx.globalAlpha = 0.5 + Math.sin(b.t * 5) * 0.4;
@@ -2220,12 +2375,12 @@
         return;
       }
 
-      openDialog(["Cụ Đồng Hồ 🕰: Cổng thời gian ở cuối con đường PHÍA NAM đã mở rồi đó. Cảnh phim tiếp theo đang chờ {name}!"]);
+      openDialog(["Cụ Đồng Hồ 🕰: Cổng thời gian ở cuối con đường PHÍA NAM đã mở rồi đó. Kí ức tiếp theo đang chờ {name}!"]);
     }
 
     function talkGardenNpc() {
       if (player.shard2) {
-        openDialog(["Cô Sóng Biển 🌊: Cảnh 2 đã nguyên vẹn trở lại rồi. Cổng ở cuối đường dạo ĐÔNG NAM mở rồi đó cưng!"]);
+        openDialog(["Cô Sóng Biển 🌊: Kí ức 2 đã nguyên vẹn trở lại rồi. Cổng ở cuối đường dạo ĐÔNG NAM mở rồi đó cưng!"]);
         return;
       }
       openDialog(CONFIG.npcLines.gardenIntro, () => openCatchGame());
@@ -2234,14 +2389,14 @@
     function talkFestivalMc() {
       if (player.shard6) {
         openDialog([
-          "MC Lễ Hội 🎤: Quán quân đố vui đây rồi! Cổng tới Cánh Đồng Sao đang chờ {name} đó!",
+          "MC Lễ Hội 🎤: Quán quân đố vui đây rồi! Cổng tới Nhà Hàng Ngàn Sao đang chờ {name} đó!",
           "MC Lễ Hội 🎤: Rảnh thì thắp thêm đèn lồng chúc mừng cho lễ hội thêm lung linh nha 🏮"
         ]);
         return;
       }
       openDialog([
         "MC Lễ Hội 🎤: Xin một tràng pháo tay cho nhà du hành thời gian {name} nào! 👏",
-        "MC Lễ Hội 🎤: Mảnh Thời Gian cuối cùng đang nằm trong tay tôi. Muốn lấy thì phải thắng trò ĐỐ VUI CHUYỆN CHÚNG MÌNH!",
+        "MC Lễ Hội 🎤: Mảnh Kí Ức cuối cùng đang nằm trong tay tôi. Muốn lấy thì phải thắng trò ĐỐ VUI CHUYỆN CHÚNG MÌNH!",
         "MC Lễ Hội 🎤: Luật chơi siêu dễ: trả lời đúng hết là thắng. Trả lời sai thì... trả lời lại tới khi đúng thì thôi 😆"
       ], () => openQuizGame());
     }
@@ -2256,7 +2411,7 @@
       burst(target.x + target.w / 2, target.y + target.h / 2, "#ff7ab6", 30, "heart");
       openDialog([
         "KÉT MỞ RỒI! Không chuông báo động, không cảnh sát pixel nào xuất hiện 😎",
-        "Bên trong không có vàng bạc gì hết... chỉ có Mảnh Thời Gian số 3 — cuộn phim quý nhất — đang phát sáng dịu dàng.",
+        "Bên trong không có vàng bạc gì hết... chỉ có Mảnh Kí Ức số 3 — kí ức quý giá nhất — đang phát sáng dịu dàng.",
         "Hóa ra thứ quý nhất trong ngân hàng này chưa bao giờ là tiền.",
         "Đội mây bảo vệ nhìn nhau... rồi vỗ tay rào rào. Giờ thì chuồn êm theo LỐI THOÁT PHÍA BẮC thôi! 💨"
       ]);
@@ -2277,7 +2432,7 @@
       player["shard" + number] = true;
       player.shards = Math.min(6, player.shards + 1);
       burst(player.x + player.w / 2, player.y + player.h / 2 - 10, CONFIG.colors.primary, 34, "heart");
-      showToast(`Nhận Mảnh Thời Gian số ${number}! ⏳`);
+      showToast(`Nhận Mảnh Kí Ức số ${number}! ⏳`);
       if (number === 1) unlockAchievement("first_piece");
       if (player.shards >= 6) unlockAchievement("all_pieces");
       sfx("piece");
@@ -2380,9 +2535,9 @@
         unlockAchievement("tictac_catcher");
         completeQuest();
         openDialog([
-          "TÓM ĐƯỢC RỒI! Tíc Tắc xịt một đám khói vàng, làm rơi ra... một xấp KHUNG PHIM ký ức 🎞",
+          "TÓM ĐƯỢC RỒI! Tíc Tắc xịt một đám khói vàng, làm rơi ra... một xấp MẢNH KÍ ỨC lấp lánh ✨",
           "Tíc Tắc 💨: Hắt xì! X-xin lỗi mà... tớ đâu có định phá, tớ chỉ muốn có người chơi cùng thôi 🥺",
-          "Đem xấp khung phim tới cho Cụ Đồng Hồ để ghép lại CẢNH 1: NGÀY ĐẦU GẶP GỠ nha!"
+          "Đem xấp mảnh kí ức tới cho Cụ Đồng Hồ để ghép lại KÍ ỨC 1: NGÀY ĐẦU GẶP GỠ nha!"
         ]);
       } else {
         // Tíc Tắc vọt tới một góc khác của thị trấn.
@@ -2583,9 +2738,9 @@
       addStars(3);
       completeQuest();
       openDialog([
-        "Khung phim cuối cùng khớp vào nhau — cả thị trấn sáng bừng lên!",
-        "🎬 CẢNH 1: NGÀY ĐẦU GẶP GỠ đã nguyên vẹn trở lại 💗",
-        "Cụ Đồng Hồ 🕰: Giỏi lắm! Cổng thời gian PHÍA NAM mở rồi — Cảnh 2: Buổi Hẹn Bờ Biển đang chờ cháu đó!"
+        "Mảnh kí ức cuối cùng khớp vào nhau — cả thị trấn sáng bừng lên!",
+        "💭 KÍ ỨC 1: NGÀY ĐẦU GẶP GỠ đã nguyên vẹn trở lại 💗",
+        "Cụ Đồng Hồ 🕰: Giỏi lắm! Cổng thời gian PHÍA NAM mở rồi — Kí Ức 2: Buổi Hẹn Bờ Biển đang chờ cháu đó!"
       ]);
     }
 
@@ -2703,8 +2858,8 @@
       completeQuest();
       openDialog([
         "Chiếc giỏ đầy ắp vỏ sò và những trái tim theo gió biển bay về 🐚💗",
-        "Sóng lặng dần... 🎬 CẢNH 2: BUỔI HẸN ĐẦU TIÊN lành lại y như chiều hôm ấy.",
-        "Cô Sóng Biển 🌊: Cảm ơn cưng! Mảnh Thời Gian số 2 là của cưng. Cổng ở cuối đường dạo ĐÔNG NAM mở rồi đó!"
+        "Sóng lặng dần... 💭 KÍ ỨC 2: BUỔI HẸN ĐẦU TIÊN lành lại y như chiều hôm ấy.",
+        "Cô Sóng Biển 🌊: Cảm ơn cưng! Mảnh Kí Ức số 2 là của cưng. Cổng ở cuối đường dạo ĐÔNG NAM mở rồi đó!"
       ]);
     }
 
@@ -2848,27 +3003,66 @@
       completeQuest();
       openDialog([
         "ĐỦ 50K RỒI! Toàn bộ bằng tiền công dọn sảnh lương thiện — thận vẫn còn nguyên một đôi 🎉",
-        "Cô Chủ Quầy 🧋: Combo '5 tỷ'... à nhầm, 50K của cưng đây — 2 tấm vé, 2 ly trà sữa, y hệt buổi xem phim đầu tiên 😆",
-        "Ngụm trà sữa vừa chạm môi, cả ký ức hôm ấy ùa về ngọt lịm 💗",
-        "Ơ kìa — Mảnh Thời Gian số 4 đang kẹp giữa hai tấm vé! Đi hết thảm đỏ PHÍA NAM là tới cửa PHÒNG CHIẾU 🎬"
+        "Cô Chủ Quầy 🧋: Combo của cưng đây — 1 hộp bỏng thơm lừng + 2 ly nước mát, cô tặng kèm 2 tấm vé luôn 😆",
+        "Ngụm nước mát vừa chạm môi, cả ký ức hôm ấy ùa về ngọt lịm 💗",
+        "Ơ kìa — Mảnh Kí Ức số 4 đang kẹp giữa hai tấm vé! Đi hết thảm đỏ PHÍA NAM là tới cửa PHÒNG CHIẾU 🎬"
       ]);
     }
 
     function talkSnackCounter() {
       if (player.shard4) {
-        openDialog(["Cô Chủ Quầy 🧋: Vé và trà sữa đưa cả rồi nè. Mau vào phòng chiếu kẻo trễ suất chiếu ký ức đó cưng!"]);
+        openDialog(["Cô Chủ Quầy 🧋: Bỏng nước đưa cả rồi nè. Mau vào phòng chiếu kẻo trễ suất chiếu đó cưng!"]);
         return;
       }
       openDialog([
         "Quầy nước sáng đèn, thơm nức mùi bắp rang bơ...",
-        "Cô Chủ Quầy 🧋: 2 vé + 2 ly trà sữa... tổng cộng 5 TỶ nha cưng 😌",
-        "Cô Chủ Quầy 🧋: Hihi đùa đó, 50K thôi! Chưa có tiền hả? Vậy dọn sảnh giúp cô — khách làm rơi đồ khắp nơi kìa. Dọn tới đâu trả công tới đó!"
-      ], () => openScrapGame());
+        "Cô Chủ Quầy 🧋: Combo 1 bỏng + 2 nước hết 50K nha cưng. Ủa mà ví đang 0 đồng hả... vậy giờ cưng tính sao đây?"
+      ], () => openMoneyChoice());
+    }
+
+    // Hai lựa chọn kiếm 50K — chọn sai thì Cô Chủ Quầy hoảng hồn bắt chọn lại.
+    function openMoneyChoice() {
+      openChoice("💸 Ví 0 đồng...", "Làm sao để có 50K mua combo 1 bỏng + 2 nước đây?", [
+        {
+          label: "🧹 Quét dọn sảnh kiếm tiền công",
+          onPick: () => openDialog([
+            "Cô Chủ Quầy 🧋: Chuẩn luôn! Khách làm rơi đồ khắp sảnh kìa — dọn tới đâu cô trả công tới đó 😆"
+          ], () => openScrapGame())
+        },
+        {
+          label: "🏥 Bán thận lấy 50K",
+          onPick: () => openDialog([
+            "Cô Chủ Quầy 🧋: KHOAN ĐÃ TRỜI ƠI!! Đặt cái thận xuống ngay 😱",
+            "Cô Chủ Quầy 🧋: Thận là để sống, không phải để đổi bỏng nước! Nghĩ lại đi cưng..."
+          ], () => openMoneyChoice())
+        }
+      ]);
+    }
+
+    // Overlay lựa chọn dùng chung: câu hỏi + các nút bấm.
+    function openChoice(title, question, options) {
+      document.getElementById("choiceTitle").textContent = title;
+      document.getElementById("choiceQuestion").textContent = fmt(question);
+      const box = document.getElementById("choiceOptions");
+      box.innerHTML = "";
+      options.forEach(opt => {
+        const b = document.createElement("button");
+        b.className = "quizOpt";
+        b.textContent = fmt(opt.label);
+        b.addEventListener("click", () => {
+          document.getElementById("choiceOverlay").classList.add("hidden");
+          sfx("pickup");
+          if (opt.onPick) opt.onPick();
+        });
+        box.appendChild(b);
+      });
+      document.getElementById("choiceOverlay").classList.remove("hidden");
+      sfx("memory");
     }
 
     function enterScreeningRoom() {
       if (!player.shard4) {
-        openDialog(["Bác Soát Vé 🎟 chặn ngay cửa: Có vé chưa cưng? Quầy nước ngay giữa sảnh kìa!"]);
+        openDialog(["Bác Soát Vé 🎟 chặn ngay cửa: Có combo bỏng nước chưa cưng? Quầy nước ngay giữa sảnh kìa!"]);
         sfx("locked");
         return;
       }
@@ -2886,7 +3080,7 @@
 
     function openSimonGame() {
       if (player.shard5) {
-        openDialog(["Bộ phim ký ức vẫn đang chiếu... hai chiếc ghế hàng đầu vẫn còn ấm hơi hai đứa 💗"]);
+        openDialog(["Thước phim năm ấy vẫn đang chiếu... hai chiếc ghế hàng đầu vẫn còn ấm hơi hai đứa 💗"]);
         return;
       }
       // Đã thắng phần nhịp tim rồi thì chỉ cần nhập lại từ khóa.
@@ -2976,7 +3170,7 @@
     }
 
     // ===== Chương 6: Đố Vui Chuyện Chúng Mình (quiz) =====
-    const quizGame = { idx: 0 };
+    const quizGame = { idx: 0, lock: false };
 
     function openQuizGame() {
       if (player.shard6) return;
@@ -2996,25 +3190,37 @@
         const b = document.createElement("button");
         b.className = "quizOpt";
         b.textContent = fmt(opt);
-        b.addEventListener("click", () => answerQuiz(i));
+        b.addEventListener("click", () => answerQuiz(i, b));
         box.appendChild(b);
       });
     }
 
-    function answerQuiz(i) {
+    function answerQuiz(i, btn) {
+      if (quizGame.lock) return;
       const q = CONFIG.quizQuestions[quizGame.idx];
       if (i !== q.correct) {
+        // Rung nút đỏ khi chọn sai.
+        if (btn) {
+          btn.classList.add("wrongShake");
+          setTimeout(() => btn.classList.remove("wrongShake"), 450);
+        }
         document.getElementById("quizStatus").textContent = fmt(q.wrong || "MC Lễ Hội 🎤: Chưa đúng nè, thử lại nha!");
         sfx("locked");
         return;
       }
+      // Nút bừng xanh khi đúng, chờ chút cho đã mắt rồi mới qua câu sau.
+      if (btn) btn.classList.add("right");
+      quizGame.lock = true;
       sfx("pickup");
-      quizGame.idx += 1;
-      if (quizGame.idx >= CONFIG.quizQuestions.length) {
-        winQuizGame();
-      } else {
-        renderQuizQuestion();
-      }
+      setTimeout(() => {
+        quizGame.lock = false;
+        quizGame.idx += 1;
+        if (quizGame.idx >= CONFIG.quizQuestions.length) {
+          winQuizGame();
+        } else {
+          renderQuizQuestion();
+        }
+      }, 420);
     }
 
     function winQuizGame() {
@@ -3026,10 +3232,10 @@
       completeQuest();
       burst(player.x + player.w / 2, player.y - 20, CONFIG.colors.primary, 50, "heart");
       openDialog([
-        "MC Lễ Hội 🎤: CHÍNH XÁC TUYỆT ĐỐI! Đúng là nhân vật chính thật sự của bộ phim này rồi!",
+        "MC Lễ Hội 🎤: CHÍNH XÁC TUYỆT ĐỐI! Đúng là nhân vật chính thật sự của câu chuyện này rồi!",
         "Pháo hoa pixel nở rộ trên bầu trời lễ hội 🎆",
-        "Mảnh Thời Gian số 6 — cuộn phim cuối cùng — đã về tay {name}! ⏳",
-        "Cổng sao PHÍA NAM quảng trường đã mở. Cảnh kết đẹp nhất đang chờ!"
+        "Mảnh Kí Ức số 6 — mảnh cuối cùng — đã về tay {name}! ⏳",
+        "Cổng sao PHÍA NAM quảng trường đã mở. Hồi kết ấm áp nhất đang chờ!"
       ]);
     }
 
@@ -3193,7 +3399,7 @@
         sfx("unlock");
         winCinema();
       } else {
-        ui.passwordError.textContent = fmt("Chưa đúng nhịp... gợi ý: là điều {sender} muốn nói với {name} mỗi ngày, gõ không dấu cũng được 😽");
+        ui.passwordError.textContent = fmt("Chưa đúng nè... gợi ý: điều ngọt ngào {sender} muốn nói với {name} — nó nằm ở PHẦN 1, trong giấc mơ đó. Gõ không dấu cũng được 😽");
         sfx("locked");
       }
     }
@@ -3216,12 +3422,12 @@
       sfx("complete");
       openDialog([
         "Đèn rạp tắt dần... màn ảnh bừng sáng 🎞",
-        "{sender} ngồi xuống chiếc ghế bên cạnh, khẽ đặt ly trà sữa vào tay {name}.",
+        "{sender} ngồi xuống chiếc ghế bên cạnh, khẽ đặt ly nước mát vào tay {name}, hộp bỏng nằm giữa hai ghế.",
         "Bộ phim năm ấy chiếu lại từng khung hình — hai đứa cười khúc khích y như suất chiếu đầu tiên.",
         "Trên màn ảnh, đôi nhân vật chạy về phía nhau qua bao nhiêu là mưa gió...",
         "Cảnh cuối: họ nhìn nhau thật lâu... rồi trao nhau một nụ hôn 💋",
         "Và trong bóng tối phòng chiếu, {sender} cũng nghiêng đầu... đặt lên má {name} một nụ hôn thật khẽ 💗",
-        "Mảnh Thời Gian số 5 rơi ra từ hộp bắp rang, sáng lung linh giữa hai người ⏳"
+        "Mảnh Kí Ức số 5 rơi ra từ hộp bắp rang, sáng lung linh giữa hai người ⏳"
       ], () => {
         cinemaScene.kissT = 1.6;
         burst(player.x + player.w / 2, player.y + 2, CONFIG.colors.primary, 44, "heart");
@@ -3539,7 +3745,7 @@
         return { title: "Ending Đặc Biệt: Trọn Vẹn Từng Khoảnh Khắc 💗⏳", desc: "{name} đã đi qua sáu vùng thời gian theo cách hoàn hảo nhất có thể." };
       }
       if (player.cakeBaked) return { title: "Ending Bánh Ngọt & Mèo Kem 🍰🐱", desc: "Bánh thơm, mèo cute và một hành trình được chăm chút từng chút một." };
-      if (player.love >= 80) return { title: "Ending Dịu Dàng 💗", desc: "Độ rung rinh cao làm Cánh Đồng Sao sáng hơn một chút." };
+      if (player.love >= 80) return { title: "Ending Dịu Dàng 💗", desc: "Độ rung rinh cao làm Nhà Hàng Ngàn Sao ấm hơn một chút." };
       if (player.flawlessChallenge) return { title: "Ending Siêu Trộm ✨", desc: "{name} đã hoàn thành phi vụ ngân hàng với phong độ đỉnh cao." };
       return { title: "Ending Ngọt Nhẹ 🌸", desc: "Hành trình nhỏ đã hoàn thành, đủ để mỉm cười một chút." };
     }
@@ -3580,11 +3786,11 @@
         sfx("gift");
         openDialog([
           "Cỗ Máy Thời Gian Trái Tim gầm lên, kim đồng hồ quay tít... rồi phóng vụt VỀ PHÍA TRƯỚC ⏩",
-          "Những vì sao kéo thành vệt sáng dài hai bên cửa sổ, như thước phim đang tua nhanh...",
-          "{sender}: Quá khứ mình đã cứu xong rồi. Giờ tới lượt TƯƠNG LAI — nơi toàn những kỷ niệm hai đứa CHƯA KỊP tạo ra 🚀",
+          "Những vì sao kéo thành vệt sáng dài hai bên cửa sổ — cả bầu trời như đang tua nhanh về phía trước...",
+          "{sender}: Phần 1 là GIẤC MƠ. Phần 2 là KÍ ỨC. Còn phía trước kia là TƯƠNG LAI — nơi toàn những kỷ niệm hai đứa CHƯA KỊP tạo ra 🚀",
           "Thấp thoáng phía trước: một thành phố trên mây, một lễ đường nhỏ trắng tinh, và... hình như có tiếng cười trẻ con? 👀",
-          "🎬 HẾT PHẦN 2. PHẦN 3: TƯƠNG LAI — phần hoành tráng nhất — SẮP RA MẮT!",
-          "Cảm ơn {name} đã xem tới cảnh quay cuối cùng. Hẹn gặp lại ở tương lai 💗"
+          "✨ HẾT PHẦN 2. PHẦN 3: TƯƠNG LAI — phần hoành tráng nhất — SẮP RA MẮT!",
+          "Cảm ơn {name} đã đi cùng tới tận đây. Hẹn gặp lại ở tương lai 💗"
         ]);
       }, 750);
     }
@@ -4033,8 +4239,9 @@
       ctx.save();
       const haze = ctx.createLinearGradient(0, 0, 0, VIEW_H);
       if (currentArea.id === "stars") {
-        haze.addColorStop(0, "rgba(38, 24, 68, 0.5)");
-        haze.addColorStop(0.45, "rgba(38, 24, 68, 0)");
+        // Nhà hàng ấm cúng: sương khói nâu ấm thay vì tím lạnh.
+        haze.addColorStop(0, "rgba(46, 22, 12, 0.45)");
+        haze.addColorStop(0.45, "rgba(46, 22, 12, 0)");
       } else if (["hall", "challenge", "house"].includes(currentArea.id)) {
         // Không gian trong nhà tối: sương mù tím sẫm thay vì hồng sáng.
         haze.addColorStop(0, "rgba(20, 12, 34, 0.45)");
@@ -4084,38 +4291,50 @@
       const h = hash(tx, ty);
 
       if (tile === "S") {
-        // Nền trời sao nâng cấp: có chiều sâu, sao lấp lánh và mây tím nhẹ.
-        ctx.fillStyle = "#261844";
+        // Sàn gỗ ấm của Nhà Hàng Ngàn Sao: ván gỗ nâu, ánh nến loang nhẹ.
+        const plank = ty % 2 === 0;
+        ctx.fillStyle = plank ? "#8a5632" : "#7a4a2b";
         ctx.fillRect(sx, sy, TILE, TILE);
-        ctx.fillStyle = "#352063";
-        if (h % 2 === 0) ctx.fillRect(sx, sy + 22, TILE, 10);
-        if (h % 5 === 0) {
-          ctx.fillStyle = "rgba(191,162,255,0.32)";
-          ctx.fillRect(sx + 2, sy + 10, 19, 4);
-          ctx.fillRect(sx + 8, sy + 6, 14, 5);
-        }
-        const twinkle = Math.sin(visualClock * 3 + h) > -0.15;
-        if (h % 3 === 0) drawSparkle(sx + 6, sy + 6, twinkle ? "#fff3a3" : "#d9ccff");
-        if (hash(tx + 2, ty + 3) % 4 === 0) {
-          ctx.fillStyle = twinkle ? "#fff7fb" : "#bfa2ff";
-          ctx.fillRect(sx + 22, sy + 12, 2, 2);
+        ctx.fillStyle = "rgba(255, 220, 160, 0.10)";
+        ctx.fillRect(sx, sy, TILE, 2);
+        ctx.fillStyle = "rgba(40, 20, 8, 0.30)";
+        ctx.fillRect(sx, sy + TILE - 2, TILE, 2);
+        // Khe ván + vân gỗ.
+        ctx.fillStyle = "rgba(52, 28, 12, 0.45)";
+        ctx.fillRect(sx, sy + TILE - 1, TILE, 1);
+        if (h % 3 === 0) ctx.fillRect(sx + 4, sy + 10, 12, 2);
+        if (h % 5 === 0) ctx.fillRect(sx + 18, sy + 20, 10, 2);
+        if (h % 7 === 0) { ctx.fillStyle = "#9c6740"; ctx.fillRect(sx + 8, sy + 16, 6, 2); }
+        // Đốm sáng nến ấm nhấp nháy trên sàn.
+        if (h % 9 === 0) {
+          const glow = 0.10 + Math.sin(visualClock * 2 + h) * 0.05;
+          ctx.fillStyle = `rgba(255, 209, 102, ${glow})`;
+          ctx.fillRect(sx + 6, sy + 6, 20, 16);
         }
         return;
       }
 
       if (tile === "L") {
         drawTile("S", sx, sy, tx, ty);
-        const pulse = 0.25 + Math.sin(visualClock * 2 + h) * 0.08;
-        ctx.fillStyle = `rgba(255, 243, 163, ${pulse})`;
-        ctx.fillRect(sx + 5, sy + 5, 22, 20);
-        ctx.fillStyle = "#7bf0a2";
-        ctx.fillRect(sx + 12, sy + 14, 8, 12);
-        ctx.fillStyle = "#c2ffce";
-        ctx.fillRect(sx + 14, sy + 13, 4, 13);
+        // Đèn nến đứng ấm áp của nhà hàng.
+        const pulse = 0.28 + Math.sin(visualClock * 2 + h) * 0.1;
+        ctx.fillStyle = `rgba(255, 209, 102, ${pulse})`;
+        ctx.fillRect(sx + 4, sy + 3, 24, 22);
+        // Chân nến gỗ.
+        ctx.fillStyle = "#5f3a1a";
+        ctx.fillRect(sx + 13, sy + 16, 6, 11);
+        ctx.fillRect(sx + 11, sy + 25, 10, 3);
+        // Đĩa nến + thân nến.
+        ctx.fillStyle = "#c9c3d6";
+        ctx.fillRect(sx + 11, sy + 14, 10, 3);
+        ctx.fillStyle = "#fff1b8";
+        ctx.fillRect(sx + 13, sy + 8, 6, 7);
+        // Ngọn lửa lắc lư.
+        const flick = Math.sin(visualClock * 6 + h) > 0 ? 0 : 1;
+        ctx.fillStyle = "#f2884f";
+        ctx.fillRect(sx + 14, sy + 4 + flick, 4, 5);
         ctx.fillStyle = "#fff3a3";
-        ctx.fillRect(sx + 10, sy + 9, 12, 8);
-        ctx.fillStyle = "#fff7fb";
-        ctx.fillRect(sx + 13, sy + 11, 5, 2);
+        ctx.fillRect(sx + 15, sy + 5 + flick, 2, 3);
         return;
       }
 
@@ -4162,7 +4381,9 @@
         return;
       }
 
-      drawGrassTile(sx, sy, tx, ty);
+      // Nền lót: nhà hàng dùng sàn gỗ, nơi khác dùng cỏ theo mùa.
+      if (currentArea && currentArea.id === "stars") drawTile("S", sx, sy, tx, ty);
+      else drawGrassTile(sx, sy, tx, ty);
       if (tile === "G") return;
 
       if (tile === "P") {
@@ -4171,7 +4392,32 @@
       }
 
       if (tile === "F") {
-        drawGrassTile(sx, sy, tx, ty);
+        if (currentArea && currentArea.id === "stars") {
+          // Chậu hoa nhỏ đặt trên sàn gỗ nhà hàng.
+          ctx.fillStyle = "#a0522d";
+          ctx.fillRect(sx + 11, sy + 18, 10, 7);
+          ctx.fillStyle = "#7a3b1e";
+          ctx.fillRect(sx + 11, sy + 23, 10, 2);
+          ctx.fillStyle = "#3d8a59";
+          ctx.fillRect(sx + 14, sy + 12, 4, 7);
+          drawPixelFlower(sx + 9, sy + 8, "#ff7ab6");
+          drawPixelFlower(sx + 17, sy + 10, "#ffd166");
+          return;
+        }
+        if (currentArea && currentArea.id === "festival") {
+          // Hoa băng mùa đông lấp lánh trên tuyết.
+          drawPixelFlower(sx + 6, sy + 8, h % 2 ? "#bcd4ff" : "#e6f0ff");
+          drawPixelFlower(sx + 19, sy + 16, h % 3 ? "#dfe8ff" : "#ffffff");
+          if (h % 4 === 0) drawTinyPetals(sx + 15, sy + 7, "#ffffff");
+          return;
+        }
+        if (currentArea && currentArea.id === "town") {
+          // Cúc mùa thu vàng cam.
+          drawPixelFlower(sx + 6, sy + 8, h % 2 ? "#f2a03d" : "#ffd166");
+          drawPixelFlower(sx + 19, sy + 16, h % 3 ? "#e0653a" : "#f2c14e");
+          if (h % 4 === 0) drawTinyPetals(sx + 15, sy + 7, "#ffe9b8");
+          return;
+        }
         drawPixelFlower(sx + 6, sy + 8, h % 2 ? "#ff7ab6" : "#ff9fcb");
         drawPixelFlower(sx + 19, sy + 16, h % 3 ? "#bfa2ff" : "#ffd166");
         if (h % 4 === 0) drawTinyPetals(sx + 15, sy + 7, "#fff7fb");
@@ -4192,8 +4438,8 @@
       }
 
       if (tile === "X") {
-        // Trong ngân hàng, sảnh rạp và phòng chiếu, viền là tường gạch tối.
-        if (currentArea && ["challenge", "hall", "house"].includes(currentArea.id)) {
+        // Trong ngân hàng, sảnh rạp, phòng chiếu và nhà hàng, viền là tường gạch tối.
+        if (currentArea && ["challenge", "hall", "house", "stars"].includes(currentArea.id)) {
           drawWallTile(sx, sy, tx, ty);
           return;
         }
@@ -4223,50 +4469,64 @@
 
     function drawGrassTile(sx, sy, tx, ty) {
       const h = hash(tx, ty);
-      // Nền cỏ tông đậm hoàng hôn, có loang sáng/tối tạo chiều sâu painterly.
-      ctx.fillStyle = h % 3 === 0 ? "#79c78b" : h % 3 === 1 ? "#6dbd80" : "#61b374";
+      const areaId = currentArea ? currentArea.id : "";
+      // Lễ hội mùa đông: toàn bộ nền cỏ thay bằng tuyết trắng.
+      if (areaId === "festival") { drawSnowTile(sx, sy, tx, ty); return; }
+      // Thị trấn mùa thu: bảng màu cỏ vàng óng.
+      const autumn = areaId === "town";
+      const base = autumn ? ["#e0bd5c", "#d6b150", "#caa546"] : ["#79c78b", "#6dbd80", "#61b374"];
+      ctx.fillStyle = base[h % 3];
       ctx.fillRect(sx, sy, TILE, TILE);
       ctx.fillStyle = "rgba(255,255,255,0.12)";
       if (h % 2 === 0) ctx.fillRect(sx, sy, TILE, 2);
       // Vệt cỏ đậm loang nhẹ.
-      ctx.fillStyle = "rgba(34, 108, 66, 0.26)";
+      ctx.fillStyle = autumn ? "rgba(150, 100, 30, 0.24)" : "rgba(34, 108, 66, 0.26)";
       if (h % 4 === 0) ctx.fillRect(sx + 2, sy + 18, 16, 10);
       if (hash(tx + 7, ty) % 4 === 0) ctx.fillRect(sx + 16, sy + 2, 14, 9);
       // Cọng cỏ.
-      ctx.fillStyle = "#4fae68";
+      ctx.fillStyle = autumn ? "#b9903a" : "#4fae68";
       if (h % 2 === 0) ctx.fillRect(sx + 5, sy + 7, 4, 2);
       if (hash(tx + 1, ty) % 3 === 0) ctx.fillRect(sx + 20, sy + 22, 5, 2);
       if (hash(tx + 3, ty + 2) % 5 === 0) ctx.fillRect(sx + 13, sy + 16, 3, 2);
-      // Bụi cây nhỏ tròn (giống tham chiếu).
+      // Bụi cây nhỏ tròn (mùa thu ngả cam).
       if (hash(tx + 9, ty + 4) % 13 === 0) {
-        ctx.fillStyle = "#1f6f4a";
+        ctx.fillStyle = autumn ? "#8a5a1c" : "#1f6f4a";
         ctx.fillRect(sx + 6, sy + 16, 12, 8);
         ctx.fillRect(sx + 9, sy + 13, 7, 6);
-        ctx.fillStyle = "#3b9e5f";
+        ctx.fillStyle = autumn ? "#cf8a2e" : "#3b9e5f";
         ctx.fillRect(sx + 8, sy + 15, 6, 3);
       }
       // Bụi cỏ cao kiểu Pokémon, đung đưa nhẹ.
       if (hash(tx + 2, ty + 8) % 9 === 0) {
         const sw = Math.round(Math.sin(visualClock * 2 + tx) * 1);
-        ctx.fillStyle = "#2c7f47";
+        ctx.fillStyle = autumn ? "#a37c2c" : "#2c7f47";
         ctx.fillRect(sx + 6 + sw, sy + 18, 3, 8);
         ctx.fillRect(sx + 11, sy + 16, 3, 10);
         ctx.fillRect(sx + 16 - sw, sy + 19, 3, 7);
-        ctx.fillStyle = "#43a355";
+        ctx.fillStyle = autumn ? "#caa64e" : "#43a355";
         ctx.fillRect(sx + 11, sy + 16, 1, 5);
         ctx.fillRect(sx + 7 + sw, sy + 19, 1, 4);
       }
-      // Hoa cúc trắng nhỏ rải rác.
+      // Hoa cúc trắng nhỏ / lá thu rơi rải rác.
       if (hash(tx + 5, ty + 1) % 11 === 0) {
-        ctx.fillStyle = "#fff7fb";
-        ctx.fillRect(sx + 22, sy + 9, 2, 2);
-        ctx.fillRect(sx + 20, sy + 11, 2, 2);
-        ctx.fillRect(sx + 24, sy + 11, 2, 2);
-        ctx.fillRect(sx + 22, sy + 13, 2, 2);
-        ctx.fillStyle = "#ffd166";
-        ctx.fillRect(sx + 22, sy + 11, 2, 2);
+        if (autumn) {
+          // Lá thu rơi nằm trên thảm cỏ vàng.
+          ctx.fillStyle = h % 2 ? "#e0653a" : "#cf8a2e";
+          ctx.fillRect(sx + 20, sy + 10, 4, 3);
+          ctx.fillRect(sx + 22, sy + 8, 2, 2);
+          ctx.fillStyle = "#8a4a1c";
+          ctx.fillRect(sx + 21, sy + 12, 1, 2);
+        } else {
+          ctx.fillStyle = "#fff7fb";
+          ctx.fillRect(sx + 22, sy + 9, 2, 2);
+          ctx.fillRect(sx + 20, sy + 11, 2, 2);
+          ctx.fillRect(sx + 24, sy + 11, 2, 2);
+          ctx.fillRect(sx + 22, sy + 13, 2, 2);
+          ctx.fillStyle = "#ffd166";
+          ctx.fillRect(sx + 22, sy + 11, 2, 2);
+        }
       }
-      ctx.fillStyle = "rgba(30, 90, 58, 0.24)";
+      ctx.fillStyle = autumn ? "rgba(120, 78, 24, 0.24)" : "rgba(30, 90, 58, 0.24)";
       ctx.fillRect(sx, sy + TILE - 3, TILE, 3);
 
       // Viền cát mềm ở phía đất giáp nước (mặt còn lại của bãi biển).
@@ -4277,8 +4537,59 @@
       if (isWaterTile(tx + 1, ty)) { ctx.fillStyle = sand; ctx.fillRect(sx + TILE - 6, sy, 6, TILE); ctx.fillStyle = sandLo; ctx.fillRect(sx + TILE - 7, sy, 2, TILE); }
     }
 
+    // Nền tuyết mùa đông cho Lễ Hội: trắng xanh, đụn tuyết và băng lấp lánh.
+    function drawSnowTile(sx, sy, tx, ty) {
+      const h = hash(tx, ty);
+      ctx.fillStyle = h % 3 === 0 ? "#f2f6fd" : h % 3 === 1 ? "#e9effa" : "#dfe8f6";
+      ctx.fillRect(sx, sy, TILE, TILE);
+      ctx.fillStyle = "rgba(255,255,255,0.65)";
+      if (h % 2 === 0) ctx.fillRect(sx, sy, TILE, 2);
+      // Vệt tuyết trũng xanh nhạt.
+      ctx.fillStyle = "rgba(148, 170, 214, 0.22)";
+      if (h % 4 === 0) ctx.fillRect(sx + 2, sy + 18, 16, 10);
+      if (hash(tx + 7, ty) % 4 === 0) ctx.fillRect(sx + 16, sy + 2, 14, 9);
+      // Đụn tuyết nhỏ.
+      if (hash(tx + 9, ty + 4) % 13 === 0) {
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(sx + 6, sy + 16, 12, 8);
+        ctx.fillRect(sx + 9, sy + 13, 7, 6);
+        ctx.fillStyle = "rgba(148, 170, 214, 0.4)";
+        ctx.fillRect(sx + 6, sy + 22, 12, 2);
+      }
+      // Dấu chân chim nhỏ trên tuyết.
+      if (hash(tx + 2, ty + 8) % 17 === 0) {
+        ctx.fillStyle = "rgba(120, 140, 190, 0.5)";
+        ctx.fillRect(sx + 10, sy + 20, 2, 2);
+        ctx.fillRect(sx + 14, sy + 23, 2, 2);
+        ctx.fillRect(sx + 18, sy + 20, 2, 2);
+      }
+      // Băng lấp lánh nhấp nháy.
+      if (hash(tx + 5, ty + 1) % 9 === 0) {
+        const tw = Math.sin(visualClock * 3 + h) > 0;
+        ctx.fillStyle = tw ? "#ffffff" : "#bcd4ff";
+        ctx.fillRect(sx + 22, sy + 9, 2, 2);
+        ctx.fillRect(sx + 8, sy + 6, 2, 2);
+      }
+      ctx.fillStyle = "rgba(120, 140, 190, 0.22)";
+      ctx.fillRect(sx, sy + TILE - 3, TILE, 3);
+    }
+
     function drawPathTile(sx, sy, tx, ty) {
       const h = hash(tx, ty);
+      if (currentArea && currentArea.id === "stars") {
+        // Thảm đỏ lối đi giữa các bàn của nhà hàng.
+        ctx.fillStyle = "#a83244";
+        ctx.fillRect(sx, sy, TILE, TILE);
+        ctx.fillStyle = "#8a2436";
+        ctx.fillRect(sx, sy + 27, TILE, 5);
+        ctx.fillStyle = "#c14a5e";
+        ctx.fillRect(sx, sy, TILE, 3);
+        // Hoa văn chỉ vàng dệt trên thảm.
+        ctx.fillStyle = "rgba(255, 209, 102, 0.5)";
+        if (h % 3 === 0) ctx.fillRect(sx + 13, sy + 13, 6, 2);
+        if (h % 5 === 0) ctx.fillRect(sx + 5, sy + 20, 2, 2);
+        return;
+      }
       ctx.fillStyle = "#d3a166";
       ctx.fillRect(sx, sy, TILE, TILE);
       ctx.fillStyle = "#b57e4b";
@@ -4295,12 +4606,17 @@
     }
 
     function drawTreeTile(sx, sy, h) {
+      const areaId = currentArea ? currentArea.id : "";
+      // Bảng màu tán lá theo mùa: thu vàng cam, đông xanh thông phủ tuyết.
+      let leafDark = "#145236", leaf = "#22714b", leafLight = "#31955e", leafHi = "#5bbf7f";
+      if (areaId === "town") { leafDark = "#8a4a1c"; leaf = "#c2701f"; leafLight = "#e09032"; leafHi = "#f2c14e"; }
+      if (areaId === "festival") { leafDark = "#1d4a3a"; leaf = "#2c6b52"; leafLight = "#3d8a67"; leafHi = "#7fb99a"; }
       // Tán cây đung đưa nhẹ theo gió.
       const sway = Math.round(Math.sin(visualClock * 1.6 + h % 7) * 1.2);
       // Bóng đổ mềm hình elip dưới gốc.
-      ctx.fillStyle = "rgba(40, 80, 60, 0.22)";
+      ctx.fillStyle = areaId === "festival" ? "rgba(90, 110, 160, 0.25)" : "rgba(40, 80, 60, 0.22)";
       ctx.fillRect(sx + 7, sy + 27, 20, 4);
-      ctx.fillStyle = "rgba(40, 80, 60, 0.14)";
+      ctx.fillStyle = areaId === "festival" ? "rgba(90, 110, 160, 0.15)" : "rgba(40, 80, 60, 0.14)";
       ctx.fillRect(sx + 5, sy + 26, 24, 5);
       // Thân cây có khối sáng tối.
       ctx.fillStyle = "#5f3a1a";
@@ -4310,26 +4626,36 @@
       ctx.fillStyle = "#a96f39";
       ctx.fillRect(sx + 15, sy + 19, 1, 8);
       // Tán lá nhiều lớp tròn trịa: viền tối → thân lá → highlight.
-      ctx.fillStyle = "#145236";
+      ctx.fillStyle = leafDark;
       ctx.fillRect(sx + 5 + sway, sy + 9, 22, 15);
       ctx.fillRect(sx + 8 + sway, sy + 3, 16, 15);
       ctx.fillRect(sx + 2 + sway, sy + 13, 28, 9);
-      ctx.fillStyle = "#22714b";
+      ctx.fillStyle = leaf;
       ctx.fillRect(sx + 6 + sway, sy + 10, 20, 12);
       ctx.fillRect(sx + 9 + sway, sy + 4, 14, 13);
       ctx.fillRect(sx + 3 + sway, sy + 14, 26, 7);
-      ctx.fillStyle = "#31955e";
+      ctx.fillStyle = leafLight;
       ctx.fillRect(sx + 8 + sway, sy + 7, 13, 9);
       ctx.fillRect(sx + 5 + sway, sy + 15, 8, 5);
       // Ánh sáng viền trên-trái.
-      ctx.fillStyle = "#5bbf7f";
+      ctx.fillStyle = leafHi;
       ctx.fillRect(sx + 9 + sway, sy + 5, 7, 3);
       ctx.fillRect(sx + 7 + sway, sy + 9, 3, 3);
       ctx.fillStyle = "rgba(255,255,255,0.3)";
       ctx.fillRect(sx + 10 + sway, sy + 5, 4, 1);
-      // Quả/hoa điểm xuyết.
-      ctx.fillStyle = h % 4 === 0 ? "#f085be" : "#f5d98e";
-      if (h % 3 === 0) { ctx.fillRect(sx + 20 + sway, sy + 11, 3, 3); ctx.fillRect(sx + 12 + sway, sy + 17, 2, 2); }
+      if (areaId === "festival") {
+        // Tuyết phủ dày trên tán cây mùa đông.
+        ctx.fillStyle = "#f2f6fd";
+        ctx.fillRect(sx + 8 + sway, sy + 3, 16, 4);
+        ctx.fillRect(sx + 5 + sway, sy + 9, 10, 3);
+        ctx.fillRect(sx + 20 + sway, sy + 10, 8, 3);
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(sx + 10 + sway, sy + 3, 8, 2);
+      } else {
+        // Quả/hoa điểm xuyết — mùa thu là quả đỏ chín mọng.
+        ctx.fillStyle = areaId === "town" ? "#d94f30" : (h % 4 === 0 ? "#f085be" : "#f5d98e");
+        if (h % 3 === 0) { ctx.fillRect(sx + 20 + sway, sy + 11, 3, 3); ctx.fillRect(sx + 12 + sway, sy + 17, 2, 2); }
+      }
     }
 
     // Một ô có phải là nước (kể cả viền ngoài bản đồ tính là cạn).
@@ -4864,7 +5190,42 @@
         case "timeMachine":
           drawTimeMachine(x, y);
           break;
+        case "dineTable":
+          drawDineTable(x, y);
+          break;
       }
+    }
+
+    // Bàn ăn nhà hàng: khăn đỏ viền vàng, nồi lẩu nhỏ bốc khói nghi ngút.
+    function drawDineTable(x, y) {
+      drawBlobShadow(x + 3, y + 22, 24, 5);
+      // Chân bàn gỗ.
+      ctx.fillStyle = "#5f3a1a";
+      ctx.fillRect(x + 6, y + 16, 4, 8);
+      ctx.fillRect(x + 20, y + 16, 4, 8);
+      // Mặt bàn phủ khăn đỏ viền vàng.
+      ctx.fillStyle = "#a83244";
+      ctx.fillRect(x + 2, y + 8, 26, 10);
+      ctx.fillStyle = "#c14a5e";
+      ctx.fillRect(x + 2, y + 8, 26, 3);
+      ctx.fillStyle = "#ffd166";
+      ctx.fillRect(x + 2, y + 16, 26, 2);
+      // Nồi lẩu nhỏ đặt giữa bàn.
+      ctx.fillStyle = "#3b3b52";
+      ctx.fillRect(x + 10, y + 4, 10, 6);
+      ctx.fillStyle = "#c9c3d6";
+      ctx.fillRect(x + 9, y + 4, 12, 2);
+      ctx.fillStyle = "#f2884f";
+      ctx.fillRect(x + 12, y + 6, 6, 2);
+      // Khói nghi ngút bay lên.
+      const puff = Math.floor(visualClock * 3) % 3;
+      ctx.fillStyle = "rgba(255,255,255,0.5)";
+      ctx.fillRect(x + 12, y - 2 - puff, 2, 3);
+      ctx.fillRect(x + 17, y - 5 + puff, 2, 3);
+      // Hai chén nhỏ hai bên.
+      ctx.fillStyle = "#fff7fb";
+      ctx.fillRect(x + 4, y + 11, 4, 3);
+      ctx.fillRect(x + 22, y + 11, 4, 3);
     }
 
     function drawPodium(x, y, item) {
@@ -5061,6 +5422,18 @@
         g.fillStyle = "#ff9fcb";
         g.fillRect(x + 5, baseY - 2, 2, 3);
         g.fillRect(x + 14, baseY - 2, 2, 3);
+      }
+      if (charDef.hairStyle === "buns") {
+        // Hai búi tóc tròn xoe như hai hạt dẻ, kèm nơ cam nhỏ.
+        g.fillStyle = hair;
+        g.fillRect(x + 1, baseY, 6, 6);
+        g.fillRect(x + 14, baseY, 6, 6);
+        g.fillStyle = "rgba(255,255,255,0.3)";
+        g.fillRect(x + 2, baseY + 1, 2, 2);
+        g.fillRect(x + 15, baseY + 1, 2, 2);
+        g.fillStyle = "#e0653a";
+        g.fillRect(x + 3, baseY + 4, 3, 2);
+        g.fillRect(x + 15, baseY + 4, 3, 2);
       }
 
       // Viền ngoài giúp nhân vật nổi bật trên mọi nền.
@@ -5825,7 +6198,11 @@
       const scale = Math.min(w / cols, h / rows);
       const ox = Math.floor((w - cols * scale) / 2);
       const oy = Math.floor((h - rows * scale) / 2);
-      const colors = { G: "#61b374", P: "#d3a166", F: "#f085be", T: "#22714b", W: "#1d92aa", X: "#75512f", H: "#e0518f", R: "#6f6a7d", S: "#261844", L: "#fff3a3", M: "#4a2233", B: "#33405e", A: "#dfc088" };
+      const colors = { G: "#61b374", P: "#d3a166", F: "#f085be", T: "#22714b", W: "#1d92aa", X: "#75512f", H: "#e0518f", R: "#6f6a7d", S: "#8a5632", L: "#ffd166", M: "#4a2233", B: "#33405e", A: "#dfc088" };
+      // Màu minimap đổi theo mùa/khu vực: thu vàng, đông tuyết, nhà hàng gỗ ấm.
+      if (currentArea.id === "town") { colors.G = "#d6b150"; colors.T = "#c2701f"; colors.F = "#f2a03d"; }
+      if (currentArea.id === "festival") { colors.G = "#e9effa"; colors.T = "#2c6b52"; colors.F = "#bcd4ff"; }
+      if (currentArea.id === "stars") { colors.P = "#a83244"; colors.X = "#2f2545"; colors.F = "#3d8a59"; }
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
           mctx.fillStyle = colors[currentArea.map[y][x]] || "#b8f7c1";
@@ -6186,7 +6563,7 @@
       showChapterBanner(CONFIG.chapters.town);
       openDialog(CONFIG.openingStory.concat([
         "Chào mừng {name} đến với Love Quest II: Time Adventure!",
-        "Đi qua 6 cảnh phim, thắng 6 trò chơi nhỏ, gom đủ 6 Mảnh Thời Gian ⏳ — rồi cỗ máy sẽ đưa {name} tới nơi chưa ai từng thấy: TƯƠNG LAI 🚀"
+        "Đi qua 6 vùng kí ức, thắng 6 trò chơi nhỏ, gom đủ 6 Mảnh Kí Ức ⏳ — rồi cỗ máy sẽ đưa {name} tới nơi chưa ai từng thấy: TƯƠNG LAI 🚀"
       ]));
       if (!audio.enabled) toggleMusic();
     });
